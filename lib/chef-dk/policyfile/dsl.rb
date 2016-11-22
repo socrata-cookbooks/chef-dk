@@ -1,4 +1,3 @@
-#
 # Copyright:: Copyright (c) 2014 Chef Software Inc.
 # License:: Apache License, Version 2.0
 #
@@ -116,6 +115,12 @@ module ChefDK
           @cookbook_location_specs[name] = spec
           @errors += spec.errors
         end
+      end
+
+      def metadata
+        cookbook_name = CookbookMetadata.from_path(".").cookbook_name
+        name cookbook_name if name.nil?
+        cookbook(cookbook_name, path: ".")
       end
 
       def default

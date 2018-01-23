@@ -1,3 +1,27 @@
+GIT
+  remote: https://github.com/chef/inspec.git
+  revision: 97749e1156ca1cfb9cac2c6a2833b447608b1cc9
+  branch: ja/test-aws-gem
+  specs:
+    inspec (1.50.3)
+      addressable (~> 2.4)
+      faraday (>= 0.9.0)
+      hashie (~> 3.4)
+      htmlentities
+      json (>= 1.8, < 3.0)
+      method_source (~> 0.8)
+      mixlib-log
+      parallel (~> 1.9)
+      parslet (~> 1.5)
+      pry (~> 0)
+      rspec (~> 3)
+      rspec-its (~> 1.2)
+      rubyzip (~> 1.1)
+      semverse
+      sslshake (~> 1.2)
+      thor (~> 0.19)
+      tomlrb (~> 1.2)
+
 PATH
   remote: .
   specs:
@@ -27,15 +51,16 @@ GEM
     app_conf (0.4.2)
     appbundler (0.10.0)
       mixlib-cli (~> 1.4)
+      mixlib-shellout (~> 2.0)
     artifactory (2.8.2)
     ast (2.3.0)
-    aws-sdk (2.10.120)
-      aws-sdk-resources (= 2.10.120)
-    aws-sdk-core (2.10.120)
+    aws-sdk (2.10.123)
+      aws-sdk-resources (= 2.10.123)
+    aws-sdk-core (2.10.123)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.10.120)
-      aws-sdk-core (= 2.10.120)
+    aws-sdk-resources (2.10.123)
+      aws-sdk-core (= 2.10.123)
     aws-sigv4 (1.0.2)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
@@ -223,7 +248,7 @@ GEM
       backports (>= 3.8.0)
       cucumber-tag_expressions (~> 1.1.0)
       gherkin (>= 5.0.0)
-    cucumber-expressions (5.0.7)
+    cucumber-expressions (5.0.13)
     cucumber-tag_expressions (1.1.1)
     cucumber-wire (0.0.1)
     dco (1.0.1)
@@ -241,7 +266,7 @@ GEM
     docker-api (1.34.0)
       excon (>= 0.47.0)
       multi_json
-    droplet_kit (2.2.1)
+    droplet_kit (2.2.2)
       activesupport (> 3.0, < 6)
       faraday (~> 0.9)
       kartograph (~> 0.2.3)
@@ -250,7 +275,7 @@ GEM
     equalizer (0.0.11)
     erubis (2.7.0)
     excon (0.60.0)
-    faraday (0.13.1)
+    faraday (0.14.0)
       multipart-post (>= 1.2, < 3)
     fauxhai (5.6.0)
       net-ssh
@@ -294,7 +319,7 @@ GEM
       fog-json (>= 1.0)
       fog-xml (>= 0.1)
       ipaddress (>= 0.8)
-    fog-scaleway (0.4.0)
+    fog-scaleway (0.5.0)
       fog-core (~> 1.42)
       fog-json (~> 1.0)
     fog-softlayer (1.1.4)
@@ -306,7 +331,7 @@ GEM
     fog-xml (0.1.3)
       fog-core
       nokogiri (>= 1.5.11, < 2.0.0)
-    foodcritic (12.2.2)
+    foodcritic (12.3.0)
       cucumber-core (>= 1.3)
       erubis
       ffi-yajl (~> 2.0)
@@ -357,30 +382,11 @@ GEM
     htmlentities (4.3.4)
     httpclient (2.8.3)
     hurley (0.2)
-    i18n (0.9.1)
+    i18n (0.9.3)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     inifile (3.0.0)
     iniparse (1.4.4)
-    inspec (1.50.1)
-      addressable (~> 2.4)
-      faraday (>= 0.9.0)
-      hashie (~> 3.4)
-      htmlentities
-      json (>= 1.8, < 3.0)
-      method_source (~> 0.8)
-      mixlib-log
-      parallel (~> 1.9)
-      parslet (~> 1.5)
-      pry (~> 0)
-      rspec (~> 3)
-      rspec-its (~> 1.2)
-      rubyzip (~> 1.1)
-      semverse
-      sslshake (~> 1.2)
-      thor (~> 0.19)
-      tomlrb (~> 1.2)
-      train (~> 0.32)
     ipaddress (0.8.3)
     iso8601 (0.9.1)
     jmespath (1.3.1)
@@ -410,7 +416,7 @@ GEM
       hashie (~> 3.4)
       inspec (>= 0.34.0, < 2.0.0)
       test-kitchen (~> 1.6)
-    kitchen-vagrant (1.2.1)
+    kitchen-vagrant (1.3.0)
       test-kitchen (~> 1.4)
     knife-cloud (1.2.1)
       chef (>= 0.10.10)
@@ -646,7 +652,7 @@ GEM
       uuid (~> 2.0)
     syslog-logger (1.6.8)
     systemu (2.6.5)
-    test-kitchen (1.19.2)
+    test-kitchen (1.20.0)
       mixlib-install (~> 3.6)
       mixlib-shellout (>= 1.2, < 3.0)
       net-scp (~> 1.1)
@@ -661,14 +667,6 @@ GEM
     timers (4.0.4)
       hitimes
     tomlrb (1.2.6)
-    train (0.32.0)
-      docker-api (~> 1.26)
-      json (>= 1.8, < 3.0)
-      mixlib-shellout (~> 2.0)
-      net-scp (~> 1.2)
-      net-ssh (>= 2.9, < 5.0)
-      winrm (~> 2.0)
-      winrm-fs (~> 1.0)
     treetop (1.6.9)
       polyglot (~> 0.3)
     tzinfo (1.2.4)
@@ -761,7 +759,7 @@ DEPENDENCIES
   ffi-rzmq-core
   foodcritic (>= 12.1)
   guard
-  inspec (>= 1.42.3)
+  inspec!
   kitchen-digitalocean (>= 0.9.8)
   kitchen-dokken (>= 2.5.0)
   kitchen-ec2 (>= 1.3.2)

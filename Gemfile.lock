@@ -23,6 +23,21 @@ GIT
       tomlrb (~> 1.2)
       train
 
+GIT
+  remote: https://github.com/chef/train.git
+  revision: 497daba27d7fd7d51704ac51aa0052d3bdcf9b12
+  branch: ja/test-aws-gem
+  specs:
+    train (0.32.0)
+      aws-sdk (~> 2)
+      docker-api (~> 1.26)
+      json (>= 1.8, < 3.0)
+      mixlib-shellout (~> 2.0)
+      net-scp (~> 1.2)
+      net-ssh (>= 2.9, < 5.0)
+      winrm (~> 2.0)
+      winrm-fs (~> 1.0)
+
 PATH
   remote: .
   specs:
@@ -667,14 +682,6 @@ GEM
     timers (4.0.4)
       hitimes
     tomlrb (1.2.6)
-    train (0.32.0)
-      docker-api (~> 1.26)
-      json (>= 1.8, < 3.0)
-      mixlib-shellout (~> 2.0)
-      net-scp (~> 1.2)
-      net-ssh (>= 2.9, < 5.0)
-      winrm (~> 2.0)
-      winrm-fs (~> 1.0)
     treetop (1.6.9)
       polyglot (~> 0.3)
     tzinfo (1.2.4)
@@ -804,6 +811,7 @@ DEPENDENCIES
   ruby-shadow
   stove
   test-kitchen (>= 1.18.0)
+  train!
   win32-api
   win32-dir
   win32-event

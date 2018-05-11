@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+require 'open-uri'
+instance_eval(open('https://raw.githubusercontent.com/<%= github_org %>/' \
+                   'shared/master/files/Berksfile').read)

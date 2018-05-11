@@ -50,7 +50,8 @@ cookbook_file "#{cookbook_dir}/chefignore"
 if context.use_berkshelf
 
   # Berks
-  cookbook_file "#{cookbook_dir}/Berksfile" do
+  template "#{cookbook_dir}/Berksfile" do
+    helpers(ChefDK::Generator::TemplateHelper)
     action :create_if_missing
   end
 else

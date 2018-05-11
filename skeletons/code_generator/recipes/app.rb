@@ -49,7 +49,9 @@ end
 cookbook_file "#{cookbook_dir}/chefignore"
 
 # Berks
-cookbook_file "#{cookbook_dir}/Berksfile"
+template "#{cookbook_dir}/Berksfile" do
+  helpers(ChefDK::Generator::TemplateHelper)
+end
 
 # Recipes
 

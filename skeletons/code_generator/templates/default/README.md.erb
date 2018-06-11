@@ -1,4 +1,83 @@
-# <%= cookbook_name %>
+# <%= cookbook_name.split(/[_-]/).map(&:capitalize).join(' ') %> Cookbook README
+<%
+badges = []
 
-TODO: Enter the cookbook description here.
+unless license == 'all_rights'
+  badges << {
+    badge: '[![Cookbook Version](https://img.shields.io/cookbook/v/' \
+           "#{cookbook_name}.svg)][cookbook]",
+    link: "[cookbook]: https://supermarket.chef.io/cookbooks/#{cookbook_name}"
+  }
+end
 
+if use_travis
+  badges << {
+    badge: "[![Build Status](https://img.shields.io/travis/#{github_org}/" \
+           "#{cookbook_name}.svg)][travis]",
+    link: "[travis]: https://travis-ci.org/#{github_org}/#{cookbook_name}"
+  }
+end
+%>
+<% unless badges.empty? %>
+
+<%= badges.map { |b| b[:badge] }.join("\n") %>
+
+<%= badges.map { |b| b[:link] }.join("\n") %>
+<% end %>
+
+TODO: Enter a brief cookbook description here.
+
+## Requirements
+
+TODO: Describe the supported platforms and Chef versions, additional dependencies, etc.
+
+## Usage
+
+TODO: Describe how to use the included public API (whether it be recipes or resources).
+
+## Recipes
+
+***default***
+
+TODO: Describe the default recipe.
+
+## Attributes
+
+***default***
+
+TODO: Describe any important attributes.
+
+## Resources
+
+***<%= cookbook_name.gsub('-', '_') %>***
+
+TODO: Describe the default custom resource.
+
+Syntax:
+
+```ruby
+<%= cookbook_name.gsub('-', '_') %> 'default' do
+  property1 'value1'
+  property2 'value2'
+  action :create
+end
+```
+
+Properties:
+
+| Property  | Default   | Description              |
+|-----------|-----------|--------------------------|
+| property1 | 'value1'  | A property               |
+| property2 | 'value2'  | Another property         |
+| action    | `:create` | The action(s) to perform |
+
+Actions:
+
+| Action    | Description         |
+|-----------|---------------------|
+| `:create` | Create the resource |
+| `:remove` | Remove the resource |
+
+## Maintainers
+
+- <%= maintainer_name %> <<%= maintainer_email %>>

@@ -1,35 +1,29 @@
-#
-# Cookbook:: <%= cookbook_name %>
-# Spec:: <%= recipe_name %>
-#
-<%= license_description('#') %>
+# frozen_string_literal: true
 
-require 'spec_helper'
+require_relative '../../spec_helper'
 
 describe '<%= cookbook_name %>::<%= recipe_name %>' do
-  context 'When all attributes are default, on Ubuntu 16.04' do
-    let(:chef_run) do
-      # for a complete list of available platforms and versions see:
-      # https://github.com/customink/fauxhai/blob/master/PLATFORMS.md
-      runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04')
-      runner.converge(described_recipe)
-    end
+  let(:platform) { nil }
+  let(:runner) { ChefSpec::SoloRunner.new(platform) }
+  let(:chef_run) { runner.converge(described_recipe) }
 
+  shared_examples_for 'any platform' do
     it 'converges successfully' do
       expect { chef_run }.to_not raise_error
     end
   end
 
-  context 'When all attributes are default, on CentOS 7.4.1708' do
-    let(:chef_run) do
-      # for a complete list of available platforms and versions see:
-      # https://github.com/customink/fauxhai/blob/master/PLATFORMS.md
-      runner = ChefSpec::ServerRunner.new(platform: 'centos', version: '7.4.1708')
-      runner.converge(described_recipe)
-    end
+  RSpec.configuration.supported_platforms.each do |os, versions|
+    context os.to_s.capitalize do
+      let(:platform) { os.to_s }
 
-    it 'converges successfully' do
-      expect { chef_run }.to_not raise_error
+      versions.each do |ver|
+        context ver do
+          let(:platform_version) { ver }
+
+          it_behaves_like 'any platform'
+        end
+      end
     end
   end
 end

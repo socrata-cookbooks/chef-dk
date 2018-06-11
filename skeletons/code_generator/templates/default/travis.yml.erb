@@ -1,0 +1,60 @@
+language: ruby
+rvm: system
+
+branches:
+  only:
+    - master
+
+sudo: required
+
+addons:
+  apt:
+    sources:
+      - chef-current-trusty
+    packages:
+      - chefdk
+
+services:
+  - docker
+
+install:
+  - chef exec bundle install
+
+env:
+  - SUITE=unit
+  - SUITE=default PLATFORM=ubuntu-1804
+  - SUITE=default PLATFORM=ubuntu-1604
+  - SUITE=default PLATFORM=ubuntu-1404
+
+script:
+  - if test "$SUITE" = "unit"; then chef exec delivery local all; fi
+  - if test "$SUITE" != "unit"; then chef exec microwave test $SUITE-$PLATFORM; fi
+
+stages:
+  - name: test
+  - name: deploy
+    if: NOT type = cron AND branch = master
+
+jobs:
+  include:
+    - stage: deploy
+      env:
+      script: skip
+      before_deploy:
+        - Paste output of `travis encrypt-file .travis/configs.tar.gz .travis/configs.tar.gz.enc` here
+        - tar xzf .travis/configs.tar.gz
+        - cp .travis/id_rsa ~/.ssh/
+        - chmod 0600 ~/.ssh/id_rsa
+        - git remote set-url origin git@github.com:<%= github_org %>/<%= cookbook_name %>
+      deploy:
+        provider: script
+        script: rvm use system do chef exec stove --username <%= supermarket_user %> --key .travis/client.pem
+        skip_cleanup: true
+
+notifications:
+  slack:
+    on_failure: change
+    on_success: never
+    on_pull_requests: false
+    rooms:
+      - Paste output of `travis encrypt "slack_org:slack_key"` here

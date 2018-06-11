@@ -85,7 +85,8 @@ if context.have_git
       cwd app_dir
     end
   end
-  cookbook_file "#{app_dir}/.gitignore" do
-    source 'gitignore'
+  template "#{app_dir}/.gitignore" do
+    source 'cookbook/gitignore.erb'
+    helpers(ChefDK::Generator::TemplateHelper)
   end
 end

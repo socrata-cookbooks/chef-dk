@@ -64,6 +64,26 @@ else
 
 end
 
+# TravisCI
+if context.use_travis
+  template "#{cookbook_dir}/.travis.yml" do
+    source 'travis.yml.erb'
+    helpers(ChefDK::Generator::TemplateHelper)
+  end
+
+  directory "#{cookbook_dir}/.travis"
+
+  file "#{cookbook_dir}/.travis/id_rsa" do
+    content 'Replace this file with a GitHub deploy ' \
+            "key for #{context.github_user}"
+  end
+
+  file "#{cookbook_dir}/.travis/client.pem" do
+    content 'Replace this file with a Supermarket key ' \
+            "for #{context.supermarket_user}"
+  end
+end
+
 # LICENSE
 template "#{cookbook_dir}/LICENSE" do
   helpers(ChefDK::Generator::TemplateHelper)
@@ -138,8 +158,9 @@ if context.have_git
 
   end
 
-  cookbook_file "#{cookbook_dir}/.gitignore" do
-    source 'gitignore'
+  template "#{cookbook_dir}/.gitignore" do
+    source 'cookbook/gitignore.erb'
+    helpers(ChefDK::Generator::TemplateHelper)
   end
 
   unless context.skip_git_init

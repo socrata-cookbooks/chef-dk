@@ -12,12 +12,8 @@ require 'mixlib/shellout'
                                                                .stdout.strip,
   maintainer_email: Mixlib::ShellOut.new('git config user.email').run_command
                                                                  .stdout.strip,
-  use_berkshelf: true
+  use_berkshelf: true,
+  use_travis: ChefDK::Generator.context.license != 'all_rights'
 }.each do |k, v|
   ChefDK::Generator.add_attr_to_context(k, v)
 end
-
-ChefDK::Generator.add_attr_to_context(
-  :use_travis,
-  ChefDK::Generator.context.license != 'all_rights'
-)

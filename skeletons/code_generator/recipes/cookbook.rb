@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 context = ChefDK::Generator.context
+ChefDK::Generator.add_attr_to_context(:resource_name, context.cookbook_name.gsub('-', '_'))
 cookbook_dir = File.join(context.cookbook_root, context.cookbook_name)
 
 silence_chef_formatter unless context.verbose
@@ -155,12 +156,43 @@ template "#{cookbook_dir}/spec/unit/recipes/default_spec.rb" do
   action :create_if_missing
 end
 
+cookbook_file "#{cookbook_dir}/spec/dependencies_spec.rb" do
+  action :create_if_missing
+  only_if { context.use_berkshelf }
+end
+
+cookbook_file "#{cookbook_dir}/spec/unit/resources.rb" do
+  action :create_if_missing
+end
+
+directory "#{cookbook_dir}/spec/unit/resources" do
+  recursive true
+end
+
+template "#{cookbook_dir}/spec/unit/resources/#{context.resource_name}_spec.rb" do
+  source 'resource_spec.rb.erb'
+  helpers(ChefDK::Generator::TemplateHelper)
+  action :create_if_missing
+end
+
 # Recipes
 
 directory "#{cookbook_dir}/recipes"
 
 template "#{cookbook_dir}/recipes/default.rb" do
   source 'recipe.rb.erb'
+  helpers(ChefDK::Generator::TemplateHelper)
+  action :create_if_missing
+end
+
+# Resources
+
+directory "#{cookbook_dir}/libraries/resource" do
+  recursive true
+end
+
+template "#{cookbook_dir}/libraries/resource/#{context.resource_name}.rb" do
+  source 'resource.rb.erb'
   helpers(ChefDK::Generator::TemplateHelper)
   action :create_if_missing
 end

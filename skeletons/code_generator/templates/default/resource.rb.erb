@@ -1,1 +1,42 @@
-# To learn more about Custom Resources, see https://docs.chef.io/custom_resources.html
+# frozen_string_literal: true
+
+#
+# Cookbook:: <%= cookbook_name %>
+# Library:: resource/<%= resource_name %>
+#
+<%= license_description('#') %>
+#
+
+require 'chef/resource'
+
+class Chef
+  class Resource
+    # TODO: Add a brief resource description.
+    #
+    # @author <%= maintainer_name %> <<%= maintainer_email %>>
+    class <%= resource_name.split(/[-_]/).map(&:capitalize).join  %> < Resource
+      provides :<%= resource_name %>
+
+      property :property1, String, default: 'value1'
+      property :property2, String, default: 'value2'
+
+      default_action :create
+
+      #
+      # TODO: Describe the action's behavior.
+      #
+      action :create do
+        Chef::Log.warn("Property1 is #{new_resource.property1}")
+        Chef::Log.warn("Property2 is #{new_resource.property2}")
+      end
+
+      #
+      # TODO: Describe the action's behavior.
+      #
+      action :remove do
+        Chef::Log.warn("Property1 is #{new_resource.property1}")
+        Chef::Log.warn("Property2 is #{new_resource.property2}")
+      end
+    end
+  end
+end

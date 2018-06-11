@@ -32,6 +32,11 @@ template "#{app_dir}/README.md" do
   helpers(ChefDK::Generator::TemplateHelper)
 end
 
+# Code of Conduct
+template "#{app_dir}/CODE_OF_CONDUCT.md" do
+  helpers(ChefDK::Generator::TemplateHelper)
+end
+
 # Generated Cookbook:
 
 # cookbook collection dir

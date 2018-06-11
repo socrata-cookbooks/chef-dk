@@ -38,6 +38,11 @@ template "#{cookbook_dir}/README.md" do
   action :create_if_missing
 end
 
+# Code of Conduct
+template "#{cookbook_dir}/CODE_OF_CONDUCT.md" do
+  helpers(ChefDK::Generator::TemplateHelper)
+end
+
 # CHANGELOG
 template "#{cookbook_dir}/CHANGELOG.md" do
   helpers(ChefDK::Generator::TemplateHelper)

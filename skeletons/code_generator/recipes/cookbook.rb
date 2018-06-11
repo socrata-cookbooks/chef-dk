@@ -48,6 +48,11 @@ template "#{cookbook_dir}/CONTRIBUTING.md" do
   helpers(ChefDK::Generator::TemplateHelper)
 end
 
+# Testing
+template "#{cookbook_dir}/TESTING.md" do
+  helpers(ChefDK::Generator::TemplateHelper)
+end
+
 # CHANGELOG
 template "#{cookbook_dir}/CHANGELOG.md" do
   helpers(ChefDK::Generator::TemplateHelper)

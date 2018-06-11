@@ -112,18 +112,6 @@ template "#{cookbook_dir}/LICENSE" do
   action :create_if_missing
 end
 
-# Test Kitchen
-template "#{cookbook_dir}/.kitchen.yml" do
-  if context.use_berkshelf
-    source 'kitchen.yml.erb'
-  else
-    source 'kitchen_policyfile.yml.erb'
-  end
-
-  helpers(ChefDK::Generator::TemplateHelper)
-  action :create_if_missing
-end
-
 # Inspec
 directory "#{cookbook_dir}/test/integration/default" do
   recursive true

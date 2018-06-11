@@ -21,6 +21,7 @@ The included generator cookbook adds all of our boilerplate on top of the defaul
 - Add a TESTING file.
 - Modify the ChefSpec templates to use our testing and coverage defaults.
 - Modify the resource templates to be more complete and have ChefSpec tests.
+- Assume use of kitchen-microwave and don't write a `.kitchen.yml`.
 
 ## Requirements
 

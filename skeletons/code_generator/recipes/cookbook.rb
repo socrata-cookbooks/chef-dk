@@ -54,6 +54,11 @@ template "#{cookbook_dir}/CHANGELOG.md" do
   action :create_if_missing
 end
 
+# Gemfile
+template "#{cookbook_dir}/Gemfile" do
+  helpers(ChefDK::Generator::TemplateHelper)
+end
+
 # chefignore
 cookbook_file "#{cookbook_dir}/chefignore"
 

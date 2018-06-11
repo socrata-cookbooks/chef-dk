@@ -43,6 +43,11 @@ template "#{cookbook_dir}/CODE_OF_CONDUCT.md" do
   helpers(ChefDK::Generator::TemplateHelper)
 end
 
+# Contributing
+template "#{cookbook_dir}/CONTRIBUTING.md" do
+  helpers(ChefDK::Generator::TemplateHelper)
+end
+
 # CHANGELOG
 template "#{cookbook_dir}/CHANGELOG.md" do
   helpers(ChefDK::Generator::TemplateHelper)

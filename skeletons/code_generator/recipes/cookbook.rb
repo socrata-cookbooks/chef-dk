@@ -140,6 +140,21 @@ template "#{cookbook_dir}/test/integration/default/default_test.rb" do
 end
 
 # Chefspec
+directory "#{cookbook_dir}/spec/support/cookbooks/resource_test/recipes" do
+  recursive true
+end
+
+template "#{cookbook_dir}/spec/support/cookbooks/resource_test/metadata.rb" do
+  source 'resource_test_cookbook/metadata.rb.erb'
+  helpers(ChefDK::Generator::TemplateHelper)
+  variables(spdx_license: spdx_license)
+end
+
+template "#{cookbook_dir}/spec/support/cookbooks/resource_test/recipes/default.rb" do
+  source 'resource_test_cookbook/default_recipe.rb.erb'
+  helpers(ChefDK::Generator::TemplateHelper)
+end
+
 directory "#{cookbook_dir}/spec/unit/recipes" do
   recursive true
 end

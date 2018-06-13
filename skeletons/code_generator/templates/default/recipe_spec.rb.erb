@@ -4,7 +4,10 @@ require_relative '../../spec_helper'
 
 describe '<%= cookbook_name %>::<%= recipe_name %>' do
   let(:platform) { nil }
-  let(:runner) { ChefSpec::SoloRunner.new(platform) }
+  let(:platform_version) { nil }
+  let(:runner) do
+    ChefSpec::SoloRunner.new(platform: platform, version: platform_version)
+  end
   let(:chef_run) { runner.converge(described_recipe) }
 
   shared_examples_for 'any platform' do

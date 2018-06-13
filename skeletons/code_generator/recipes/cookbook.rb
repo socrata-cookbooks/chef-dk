@@ -217,4 +217,10 @@ if context.have_git
   end
 end
 
+# RuboCop
+template "#{cookbook_dir}/.rubocop.yml" do
+  source 'rubocop.yml.erb'
+  helpers(ChefDK::Generator::TemplateHelper)
+end
+
 include_recipe '::build_cookbook' if context.enable_delivery

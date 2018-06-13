@@ -112,6 +112,22 @@ template "#{cookbook_dir}/LICENSE" do
   action :create_if_missing
 end
 
+# Test Kitchen
+directory "#{cookbook_dir}/test/fixtures/cookbooks/test/recipes" do
+  recursive true
+end
+
+template "#{cookbook_dir}/test/fixtures/cookbooks/test/metadata.rb" do
+  source 'wrapper_cookbook/metadata.rb.erb'
+  helpers(ChefDK::Generator::TemplateHelper)
+  variables(spdx_license: spdx_license)
+end
+
+template "#{cookbook_dir}/test/fixtures/cookbooks/test/recipes/default.rb" do
+  source 'wrapper_cookbook/default_recipe.rb.erb'
+  helpers(ChefDK::Generator::TemplateHelper)
+end
+
 # Inspec
 directory "#{cookbook_dir}/test/integration/default" do
   recursive true
@@ -215,6 +231,12 @@ if context.have_git
       cwd cookbook_dir
     end
   end
+end
+
+# RuboCop
+template "#{cookbook_dir}/.rubocop.yml" do
+  source 'rubocop.yml.erb'
+  helpers(ChefDK::Generator::TemplateHelper)
 end
 
 include_recipe '::build_cookbook' if context.enable_delivery

@@ -140,22 +140,7 @@ template "#{cookbook_dir}/test/integration/default/default_test.rb" do
 end
 
 # Chefspec
-directory "#{cookbook_dir}/spec/support/cookbooks/resource_test/recipes" do
-  recursive true
-end
-
-template "#{cookbook_dir}/spec/support/cookbooks/resource_test/metadata.rb" do
-  source 'resource_test_cookbook/metadata.rb.erb'
-  helpers(ChefDK::Generator::TemplateHelper)
-  variables(spdx_license: spdx_license)
-end
-
-template "#{cookbook_dir}/spec/support/cookbooks/resource_test/recipes/default.rb" do
-  source 'resource_test_cookbook/default_recipe.rb.erb'
-  helpers(ChefDK::Generator::TemplateHelper)
-end
-
-directory "#{cookbook_dir}/spec/unit/recipes" do
+directory "#{cookbook_dir}/spec/recipes" do
   recursive true
 end
 
@@ -169,7 +154,7 @@ cookbook_file "#{cookbook_dir}/spec/spec_helper.rb" do
   action :create_if_missing
 end
 
-template "#{cookbook_dir}/spec/unit/recipes/default_spec.rb" do
+template "#{cookbook_dir}/spec/recipes/default_spec.rb" do
   source 'recipe_spec.rb.erb'
   helpers(ChefDK::Generator::TemplateHelper)
   action :create_if_missing
@@ -180,15 +165,11 @@ cookbook_file "#{cookbook_dir}/spec/dependencies_spec.rb" do
   only_if { context.use_berkshelf }
 end
 
-cookbook_file "#{cookbook_dir}/spec/unit/resources.rb" do
-  action :create_if_missing
-end
-
-directory "#{cookbook_dir}/spec/unit/resources" do
+directory "#{cookbook_dir}/spec/resources" do
   recursive true
 end
 
-template "#{cookbook_dir}/spec/unit/resources/#{context.resource_name}_spec.rb" do
+template "#{cookbook_dir}/spec/resources/#{context.resource_name}_spec.rb" do
   source 'resource_spec.rb.erb'
   helpers(ChefDK::Generator::TemplateHelper)
   action :create_if_missing

@@ -1,3 +1,4 @@
+dist: xenial
 language: ruby
 rvm: system
 
@@ -7,17 +8,11 @@ branches:
 
 sudo: required
 
-addons:
-  apt:
-    sources:
-      - chef-current-trusty
-    packages:
-      - chefdk
-
 services:
   - docker
 
 install:
+  - curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -c current -P chefdk
   - chef exec bundle install
 
 env:
